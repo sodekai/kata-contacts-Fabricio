@@ -55,9 +55,9 @@ class Contacts:
 def yield_contacts(num_contacts):
     # TODO: Generate a lot of contacts
     # instead of just 3
-    yield ("Alice", "alice@domain.tld")
-    yield ("Bob", "bob@foo.com")
-    yield ("Charlie", "charlie@acme.corp")
+    yield ("name-1", "email-1@domain.tld")
+    yield ("name-2", "email-2@domain.tld")
+    yield ("name-3", "email-3@domain.tld")
 
 
 def main():
