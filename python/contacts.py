@@ -65,7 +65,7 @@ def main():
     db_path = Path("contacts.sqlite3")
     contacts = Contacts(db_path)
     contacts.insert_contacts(yield_contacts(num_contacts))
-    charlie = contacts.get_name_for_email("charlie@acme.corp")
+    charlie = contacts.get_name_for_email(f"email-{num_contacts}@domain.tld")
 
 
 if __name__ == "__main__":
