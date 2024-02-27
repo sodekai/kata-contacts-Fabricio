@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Contacts": {
+      "commandName": "Project",
+      "commandLineArgs": "100"
+    }
+  }
+}
