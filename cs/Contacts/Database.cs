@@ -21,14 +21,7 @@ public class Database : IDisposable
 
   public void InsertContacts(IEnumerable<Contact> contacts)
   {
-    foreach (var contact in contacts)
-    {
-      var command = _connection.CreateCommand();
-      command.CommandText = "INSERT INTO contacts(name, email) VALUES ($name, $email)";
-      command.Parameters.AddWithValue("$name", contact.Name);
-      command.Parameters.AddWithValue("$email", contact.Email);
-      command.ExecuteNonQuery();
-    }
+    // TODO
   }
 
   public string LookupContact(string email)
