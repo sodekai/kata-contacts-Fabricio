@@ -25,8 +25,22 @@ class Contacts:
         self.connection.row_factory = sqlite3.Row
 
     def insert_contacts(self, contacts):
-        print("Inserting contacts ...")
-        # TODO
+        cursor = self.connection.cursor()
+        for contact in contacts:
+            cursor.execute(
+                """
+                INSERT INTO contactsStep2 (id, name, email) VALUES (?, ?, ?)
+                """,
+                contact,  # contact est un tuple (name, email)
+            )
+        self.connection.commit()
+
+    # def insert_contacts(self, contacts):
+    #     cursor = self.connection.cursor()
+    #     cursor.executemany("INSERT INTO contacts (name, email) VALUES (?, ?)", contacts)
+    #     """for contact in contacts:
+    #         cursor.execute("INSERT INTO contacts (name, email) VALUES (?, ?)", contact)
+    #     """
 
     def get_name_for_email(self, email):
         print("Looking for email", email)
@@ -34,7 +48,7 @@ class Contacts:
         start = datetime.now()
         cursor.execute(
             """
-            SELECT * FROM contacts
+            SELECT * FROM contactsStep2
             WHERE email = ?
             """,
             (email,),
@@ -53,15 +67,18 @@ class Contacts:
 
 
 def yield_contacts(num_contacts):
+    for i in range(1, num_contacts + 1):
+        yield (f"{i}", f"name-{i}", f"email-{i}@domain.tld")
+
     # TODO: Generate a lot of contacts
     # instead of just 3
-    yield ("name-1", "email-1@domain.tld")
-    yield ("name-2", "email-2@domain.tld")
-    yield ("name-3", "email-3@domain.tld")
+    # yield ("name-1", "email-1@domain.tld")
+    # yield ("name-2", "email-2@domain.tld")
+    # yield ("name-3", "email-3@domain.tld")
 
 
 def main():
-    num_contacts = int(sys.argv[1])
+    num_contacts = 1000000
     db_path = Path("contacts.sqlite3")
     contacts = Contacts(db_path)
     contacts.insert_contacts(yield_contacts(num_contacts))
